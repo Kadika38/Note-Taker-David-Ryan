@@ -33,6 +33,18 @@ const readAndAppend = (content, file) => {
     });
 };
 
+const deleteFromDbById = (id, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            const parsedData = JSON.parse(data);
+            parsedDataUpdated = parsedData.filter(note => note.id !== id);
+            writeToFile(file, parsedDataUpdated);
+        }
+    });
+}
+
 //app.gets
 
 app.get('/', (req, res) => {
@@ -64,7 +76,17 @@ app.post('/api/notes', (req, res) => {
     } else {
         res.error('Error in saving note');
     }
-})
+});
+
+//app.deletes
+
+app.delete('/api/notes/:id', (req, res) => {
+    const id = req.params.id;
+
+    deleteFromDbById(id, './db/db.json');
+
+    res.json('Note deleted succesfully!');
+});
 
 
 app.listen(PORT, () => {
