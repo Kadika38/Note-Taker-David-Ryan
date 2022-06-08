@@ -33,6 +33,7 @@ const readAndAppend = (content, file) => {
     });
 };
 
+//helper func - fully original not copy-pasted
 const deleteFromDbById = (id, file) => {
     fs.readFile(file, 'utf8', (err, data) => {
         if (err) {
@@ -88,6 +89,7 @@ app.delete('/api/notes/:id', (req, res) => {
     res.json('Note deleted succesfully!');
 });
 
+//app.listen
 
 app.listen((process.env.PORT || PORTKad), () => {
     console.log("App live at local port or deployed to heroku");
