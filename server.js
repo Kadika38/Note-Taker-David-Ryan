@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const uuid = require('./helpers/uuid');
-const PORT = 3001;
+const PORTKad = 3001;
 
 const app = express();
 
@@ -89,6 +89,6 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`);
+app.listen((process.env.PORT || PORTKad), () => {
+    console.log("App live at local port or deployed to heroku");
 });
